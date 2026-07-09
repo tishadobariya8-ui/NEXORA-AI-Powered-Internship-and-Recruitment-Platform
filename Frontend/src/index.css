@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root{
+
+--bg:#FCFAF7;
+--bg2:#F7F4EF;
+--bg3:#ECE7DE;
+
+--white:#ffffff;
+
+--ink:#1F203A;
+--ink2:#363654;
+--ink3:#666683;
+--ink4:#9B9BB0;
+
+--sage:#4A7C59;
+--sage2:#7EA981;
+--sage-lt:#EAF4EC;
+
+--terra:#C4622D;
+--terra-lt:#FFF1E8;
+
+--blue:#3A6EA5;
+--blue-lt:#EEF5FC;
+
+--border:#E8E3DA;
+--border2:#DDD6CA;
+
+--nav:80px;
+
+--r1:12px;
+--r2:18px;
+--r3:28px;
+
+--sh1:0 8px 24px rgba(0,0,0,.06);
+--sh2:0 18px 50px rgba(0,0,0,.08);
+
+--fh:"Playfair Display",serif;
+--fb:"Inter",sans-serif;
+}
+
+*{
+margin:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:var(--fb);
+background:var(--bg);
+color:var(--ink);
+overflow-x:hidden;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+.page-container{
+width:100%;
+max-width:1200px;
+margin:0 auto;
+}

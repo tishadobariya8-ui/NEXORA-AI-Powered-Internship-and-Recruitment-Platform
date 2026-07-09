@@ -1,0 +1,63 @@
+/* ===============================
+   PRIMARY BUTTON
+=============================== */
+
+.btn-primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:white;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-primary:hover{
+    background:var(--primary-hover);
+    transform:translateY(-2px);
+}
+
+/* ===============================
+   SECONDARY BUTTON
+=============================== */
+
+.btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:white;
+    border:1px solid var(--primary-border);    
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-secondary:hover{
+    background:var(--primary-hover);
+}
+
+/* ===============================
+   SMALL BUTTON
+=============================== */
+
+.btn-sm{
+    font-size:14px;
+}
+
+/* ===============================
+   LARGE BUTTON
+=============================== */
+
+.btn-lg{
+    font-size:16px;
+}

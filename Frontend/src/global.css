@@ -1,0 +1,61 @@
+/* GLOBAL CONTAINER */
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+}
+
+/* GLOBAL SECTION*/
+
+.section{
+    padding:60px 0;
+}
+
+/* GLOBAL TYPOGRAPHY */
+
+.page-title{
+    font-family:var(--fh);
+    font-size:clamp(36px,4vw,60px);
+    font-weight:700;
+    color:var(--ink);
+}
+
+.page-subtitle{
+    font-size:18px;
+    color:var(--ink3);
+}
+
+/* RESPONSIVE */
+
+@media (max-width:768px){
+.container{
+    padding:0 18px;
+}
+.section{
+    padding:50px 0;
+}
+}
+
+@media (max-width:480px){
+.container{
+    padding:0 15px;
+}
+.section{
+    padding:40px 0;
+}
+}
+
+body{
+    padding-top:68px;
+}
+
+/*  Common page layout  */
+
+.page {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 110px 32px 60px;
+}

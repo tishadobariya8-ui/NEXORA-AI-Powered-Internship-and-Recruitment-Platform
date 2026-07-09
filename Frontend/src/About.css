@@ -1,0 +1,695 @@
+/* =====================================
+   ABOUT PAGE - PART 1
+   Hero + Mission
+===================================== */
+
+.about-container{
+    width:92%;
+    max-width:1280px;
+    margin:0 auto;
+}
+
+/* ================= HERO ================= */
+
+.about-hero{
+    background:var(--bg);
+    padding:70px 0 50px;
+}
+
+.about-tag{
+    display:inline-block;
+    padding:10px 22px;
+    background:var(--sage-lt);
+    color:var(--sage);
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:24px;
+}
+
+.about-hero h1{
+    font-family:var(--fh);
+    font-size:clamp(48px,5vw,68px);
+    line-height:1.08;
+    font-weight:800;
+    color:var(--ink);
+    margin-bottom:24px;
+}
+
+.about-hero h1 span{
+    color:var(--sage);
+    font-style:italic;
+}
+
+.about-hero p{
+    max-width:760px;
+    font-size:18px;
+    color:var(--ink3);
+    line-height:1.8;
+}
+
+/* ================= MISSION ================= */
+
+.mission-section{
+    padding:70px 0;
+}
+
+.mission-card{
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-top:4px solid var(--sage);
+
+    border-radius:24px;
+
+    padding:55px;
+
+    text-align:center;
+
+    box-shadow:var(--sh1);
+
+    transition:.35s;
+
+}
+
+.mission-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sh2);
+
+}
+
+.mission-icon{
+
+    font-size:56px;
+
+    margin-bottom:20px;
+
+}
+
+.mission-card h2{
+
+    font-family:var(--fh);
+
+    font-size:42px;
+
+    color:var(--ink);
+
+    margin-bottom:22px;
+
+}
+
+.mission-card p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    font-size:18px;
+
+    color:var(--ink3);
+
+    line-height:1.85;
+
+}
+
+/* =====================================
+   COMMON SECTION
+===================================== */
+
+.section-title{
+
+    font-family:var(--fh);
+
+    font-size:clamp(34px,4vw,50px);
+
+    color:var(--ink);
+
+    line-height:1.15;
+
+    margin-bottom:18px;
+
+}
+
+.section-sub{
+
+    max-width:650px;
+
+    font-size:17px;
+
+    color:var(--ink3);
+
+    line-height:1.8;
+
+    margin-bottom:45px;
+
+}
+
+/* =====================================
+   ABOUT PAGE - PART 2
+   Values Section
+===================================== */
+
+.values-section{
+    padding:70px 0;
+}
+
+/* Grid */
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+/* Card */
+
+.value-card{
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:32px;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    box-shadow:var(--sh1);
+
+}
+
+.value-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sh2);
+
+}
+
+/* Icon */
+
+.value-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--bg2);
+
+    font-size:30px;
+
+    margin-bottom:22px;
+
+}
+
+/* Heading */
+
+.value-card h3{
+
+    font-family:var(--fh);
+
+    font-size:28px;
+
+    color:var(--ink);
+
+    margin-bottom:14px;
+
+}
+
+/* Text */
+
+.value-card p{
+
+    color:var(--ink3);
+
+    font-size:16px;
+
+    line-height:1.75;
+
+}
+
+/* =====================================
+   ABOUT PAGE - PART 3
+   Founders Section
+===================================== */
+
+.founders-section{
+    padding:70px 0;
+}
+
+.founders-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:26px;
+
+    max-width:950px;
+
+    margin:auto;
+
+}
+
+/* Founder Card */
+
+.founder-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:36px;
+
+    transition:.35s;
+
+    box-shadow:var(--sh1);
+
+}
+
+.founder-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sh2);
+
+}
+
+/* Bottom Line */
+
+.founder-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:var(--sage);
+
+    transform:scaleX(0);
+
+    transition:.35s;
+
+    transform-origin:left;
+
+}
+
+.founder-card:hover::after{
+
+    transform:scaleX(1);
+
+}
+
+/* Avatar */
+
+.founder-avatar{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:22px;
+
+}
+
+.green{
+
+    background:var(--sage);
+
+}
+
+.blue{
+
+    background:var(--blue);
+
+}
+
+/* Name */
+
+.founder-card h3{
+
+    font-family:var(--fh);
+
+    font-size:30px;
+
+    color:var(--ink);
+
+    margin-bottom:8px;
+
+}
+
+/* Role */
+
+.founder-card h4{
+
+    font-size:17px;
+
+    color:var(--sage);
+
+    margin-bottom:18px;
+
+}
+
+/* Description */
+
+.founder-card p{
+
+    font-size:16px;
+
+    line-height:1.75;
+
+    color:var(--ink3);
+
+    margin-bottom:24px;
+
+}
+
+/* Tags */
+
+.founder-tags{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+.founder-tags span{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:var(--bg2);
+
+    color:var(--ink2);
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+/* =====================================
+   ABOUT PAGE - PART 4
+   Quote Section
+===================================== */
+
+.quote-section{
+    padding:70px 0 90px;
+}
+
+.quote-card{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:60px 50px;
+
+    border-radius:24px;
+
+    background:linear-gradient(135deg,var(--sage),#5E936C);
+
+    text-align:center;
+
+    color:#fff;
+
+    box-shadow:0 20px 55px rgba(74,124,89,.20);
+
+}
+
+.quote-card p{
+
+    font-family:var(--fh);
+
+    font-size:30px;
+
+    line-height:1.5;
+
+    margin-bottom:22px;
+
+}
+
+.quote-card h4{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    opacity:.9;
+
+}
+
+/* =====================================
+   HOVER EFFECTS
+===================================== */
+
+.mission-card,
+.value-card,
+.founder-card{
+
+    transition:all .35s ease;
+
+}
+
+.mission-card:hover,
+.value-card:hover,
+.founder-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--sh2);
+
+}
+
+/* =====================================
+   SCROLL ANIMATION
+===================================== */
+
+.about-hero,
+.mission-section,
+.values-section,
+.founders-section,
+.quote-section{
+
+    animation:fadeUp .7s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:1100px){
+
+.about-container{
+
+    width:94%;
+
+}
+
+.values-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.founders-grid{
+
+    grid-template-columns:1fr;
+
+    max-width:700px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.about-hero{
+
+    padding:50px 0;
+
+}
+
+.about-hero h1{
+
+    font-size:44px;
+
+}
+
+.about-hero p{
+
+    font-size:16px;
+
+}
+
+.mission-card{
+
+    padding:40px 28px;
+
+}
+
+.mission-card h2{
+
+    font-size:34px;
+
+}
+
+.mission-card p{
+
+    font-size:16px;
+
+}
+
+.values-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.value-card{
+
+    padding:28px;
+
+}
+
+.value-card h3{
+
+    font-size:24px;
+
+}
+
+.founder-card{
+
+    padding:28px;
+
+}
+
+.founder-card h3{
+
+    font-size:26px;
+
+}
+
+.quote-card{
+
+    padding:40px 28px;
+
+}
+
+.quote-card p{
+
+    font-size:22px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.about-tag{
+
+    padding:8px 18px;
+
+    font-size:11px;
+
+}
+
+.about-hero h1{
+
+    font-size:34px;
+
+}
+
+.section-title{
+
+    font-size:30px;
+
+}
+
+.mission-card{
+
+    padding:30px 20px;
+
+}
+
+.quote-card{
+
+    padding:30px 20px;
+
+}
+
+.quote-card p{
+
+    font-size:19px;
+
+}
+
+}

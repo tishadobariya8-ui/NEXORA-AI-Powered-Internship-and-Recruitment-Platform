@@ -1,0 +1,75 @@
+/*  GLOBAL LAYOUT  */
+
+.page{
+    padding-top: 92px;
+}
+
+.section{
+    padding:60px 0;
+}
+
+.container{
+    width:min(1200px,92%);
+    margin:auto;
+}
+
+/*  TYPOGRAPHY  */
+
+.page-title{
+    font-family:var(--fh);
+    font-size:clamp(42px,4vw,64px);
+    line-height:1.1;
+    color:var(--ink);
+}
+
+.section-title{
+    font-family:var(--fh);
+    font-size:34px;
+    color:var(--ink);
+}
+
+.subtitle{
+    font-size:18px;
+    color:var(--ink3);
+    line-height:1.6;
+}
+
+.small-text{
+    font-size:15px;
+    color:var(--ink3);
+}
+
+/*  RESPONSIVE  */
+
+@media(max-width:992px){
+
+.container{
+    width:94%;
+}
+.page{
+    padding-top:82px;
+}
+}
+
+@media(max-width:768px){
+
+.page{
+    padding-top:78px;
+}
+
+.section{
+    padding:45px 0;
+}
+
+.page-title{
+    font-size:44px;
+}
+
+.section-title{
+    font-size:30px;
+}
+
+.subtitle{
+    font-size:16px;
+}
+}
