@@ -2,11 +2,51 @@ import "../About.css";
 import Navbar from "../components/Navbar";
 
 function About() {
+
+  const values = [
+    {
+      icon: "🌍",
+      title: "Accessibility",
+      description:
+        "Every student deserves great opportunities, regardless of college tier or city.",
+    },
+    {
+      icon: "🤝",
+      title: "Trust",
+      description:
+        "Every listing and certificate is verified to ensure quality and authenticity.",
+    },
+    {
+      icon: "📊",
+      title: "Transparency",
+      description:
+        "Clear progress tracking and honest feedback so everyone grows together.",
+    },
+    {
+      icon: "⚡",
+      title: "Speed",
+      description:
+        "Application to placement in days, not months. Your career can't wait.",
+    },
+    {
+      icon: "🏅",
+      title: "Excellence",
+      description:
+        "High standards for interns and employers — a self-reinforcing cycle of quality.",
+    },
+    {
+      icon: "🔬",
+      title: "Innovation",
+      description:
+        "Smart technology connects the right people to the right opportunities every time.",
+    },
+  ];
+
   return (
     <>
       <Navbar />
 
-      {/* ================= HERO ================= */}
+      {/*  HERO  */}
 
       <section className="about-hero">
         <div className="about-container page-container">
@@ -26,7 +66,7 @@ function About() {
         </div>
       </section>
 
-      {/* ================= MISSION ================= */}
+    {/* MISSION */}
 
       <section className="mission-section">
         <div className="about-container page-container">
@@ -45,7 +85,7 @@ function About() {
         </div>
       </section>
 
-      {/* ================= VALUES ================= */}
+      {/*  VALUES  */}
 
       <section className="values-section">
         <div className="about-container page-container">
@@ -56,76 +96,16 @@ function About() {
             What we stand for
           </h2>
           <div className="values-grid">
-
-            {/* Card 1 */}
-
-            <div className="value-card">
-              <div className="value-icon">🌍</div>
-              <h3>Accessibility</h3>
-              <p>
-                Every student deserves great opportunities,
-                regardless of college tier or city.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-
-            <div className="value-card">
-              <div className="value-icon">🤝</div>
-              <h3>Trust</h3>
-              <p>
-                Every listing and certificate is verified to ensure
-                quality and authenticity.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-
-            <div className="value-card">
-              <div className="value-icon">📊</div>
-              <h3>Transparency</h3>
-              <p>
-                Clear progress tracking and honest feedback
-                so everyone grows together.
-              </p>
-            </div>
-
-            {/* Card 4 */}
-
-            <div className="value-card">
-              <div className="value-icon">⚡</div>
-              <h3>Speed</h3>
-              <p>
-                Application to placement in days,
-                not months. Your career can't wait.
-              </p>
-            </div>
-
-            {/* Card 5 */}
-
-            <div className="value-card">
-              <div className="value-icon">🏅</div>
-              <h3>Excellence</h3>
-              <p>
-                High standards for interns and employers —
-                a self-reinforcing cycle of quality.
-              </p>
-            </div>
-
-            {/* Card 6 */}
-
-            <div className="value-card">
-              <div className="value-icon">🔬</div>
-              <h3>Innovation</h3>
-              <p>
-                Smart technology connects the right people
-                to the right opportunities every time.
-              </p>
-            </div>
-          </div>
+            {values.map((value, index) => (
+              <div className="value-card" key={index}>
+                <div className="value-icon">{value.icon}</div>
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </div>
+            ))}
+          </div> 
         </div>
       </section>
-
       
     </>
   );

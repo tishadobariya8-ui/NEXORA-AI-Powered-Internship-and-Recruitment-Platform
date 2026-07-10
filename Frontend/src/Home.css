@@ -4,7 +4,7 @@
     overflow-x:hidden;
 }
 
-/* ================= HERO ================= */
+/*  HERO  */
 
 .hero{
     position:relative;
@@ -124,7 +124,7 @@
     background:var(--border);
 }
 
-/* ================= HERO CARD ================= */
+/*  HERO CARD  */
 
 .hero-visual{
     position:relative;
@@ -243,7 +243,7 @@
     box-shadow:0 0 0 5px var(--sage-lt);
 }
 
-/* ================= TRUST ================= */
+/*  TRUST  */
 
 .trust{
     background:var(--bg2);
@@ -291,7 +291,7 @@
     color:#8D90A5;
 }
 
-/* ================= Responsive ================= */
+/*  Responsive  */
 
 @media(max-width:992px){
 
@@ -348,7 +348,7 @@
 
 }
 
-/* ================= COMMON SECTION ================= */
+/*  COMMON SECTION  */
 
 .sw{
     padding:110px 60px;
@@ -397,9 +397,7 @@
     color:var(--ink3);
 }
 
-/* ===================================================
-                    PROCESS STEPS
-=================================================== */
+/* PROCESS STEPS */
 
 .steps-grid{
     display:grid;

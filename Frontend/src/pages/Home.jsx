@@ -9,7 +9,7 @@ function Home() {
     <>
       <Navbar />
 
-      {/* ================= HERO ================= */}
+      {/*  HERO  */}
 
       <main id="page-home">
         <section className="hero">
@@ -77,7 +77,7 @@ function Home() {
                   Frontend Engineering Intern
                 </div>
                 <div className="hcm-sub">
-                  FinPulse • Bangalore • Remote • ₹15,000/mo
+                  FinPulse • Bangalore • Remote • ₹15,000/mon
                 </div>
                 <div className="hcm-pl">
                   <span>Internship Progress</span>
@@ -109,7 +109,7 @@ function Home() {
               </div>
               <div className="hcard-f2">
                 <span className="dotg"></span>
-                248 live internships
+                  48 live internships
               </div>
             </div>
           </div>
@@ -398,14 +398,14 @@ function Home() {
           </div>
           <div className="foot-col">
             <h4>PLATFORM</h4>
-            <a href="#">Browse Internships</a>
+            <a href="/internships">Browse Internships</a>
             <a href="#">For Students</a>
             <a href="#">For Startups</a>
             <a href="#">For Companies</a>
           </div>
           <div className="foot-col">
             <h4>COMPANY</h4>
-            <a href="#">About Us</a>
+            <a href="/about">About Us</a>
             <a href="#">Blog</a>
             <a href="#">Careers</a>
             <a href="#">Press</a>
