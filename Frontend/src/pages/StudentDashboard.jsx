@@ -3,15 +3,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../StudentDashboard.css";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/useAuth";
-import axios from "axios";
 import AIAssistant from "../components/AIAssistant";
-import Api from "../api";
+import API from "../api";
 
 function StudentDashboard() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const API_URL = "http://127.0.0.1:8000";
     const { user, logout } = useAuth();
     
     const [activePanel, setActivePanel] = useState(
@@ -35,8 +33,8 @@ function StudentDashboard() {
         if (!currentUser.email) return;
         const fetchProfile = async () => {
             try {
-                const response = await axios.get(
-                    `${API_URL}/api/profile/me`,
+                const response = await API.get(
+                    "/api/profile/me",
                     {
                         params: {
                             email: currentUser.email
@@ -57,8 +55,8 @@ function StudentDashboard() {
         if (!currentUser.email) return;
         const fetchApplications = async () => {
             try {
-                const response = await axios.get(
-                    `${API_URL}/api/applications/my-applications`,
+                const response = await API.get(
+                    "/api/applications/my-applications",
                     {
                         params: {
                             email: currentUser.email
@@ -78,7 +76,7 @@ function StudentDashboard() {
         if (!user) return;
         const fetchSavedInternships = async () => {
             try {
-                const response = await Api.get(`/api/save/${user.email}`);
+                const response = await API.get(`/api/save/${user.email}`);
                 setSavedInternships(response.data);
             } catch (err) {
                 console.error(err);
@@ -93,7 +91,7 @@ function StudentDashboard() {
 
     const removeSaved = async (id) => {
         try {
-            await Api.delete("/api/save", {
+            await API.delete("/api/save", {
                 data: {
                     user_email: user.email,
                     internship_id: id

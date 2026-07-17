@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../Signup.css";
+import API from "../api";
 
 function Signup() {
 
@@ -20,7 +20,6 @@ function Signup() {
     });
 
     const navigate = useNavigate();
-    const API_URL = "http://127.0.0.1:8000";
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
     const [successMessage, setSuccessMessage] = useState("");
@@ -101,9 +100,9 @@ function Signup() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                 const response = await axios.post(
+                 const response = await API.post(
                     
-                    `${API_URL}/api/auth/signup`,
+                    "/api/auth/signup",
                     {
                         fullName: formData.fullName,
                         email: formData.email,

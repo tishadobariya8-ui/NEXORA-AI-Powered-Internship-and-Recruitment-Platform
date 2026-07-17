@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "./AIAssistant.css";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 function AIAssistant() {
 
-    const API_URL = "http://127.0.0.1:8000";
     const [internships, setInternships] = useState([]);
     const [message, setMessage] = useState("");
     const [selectedInternship, setSelectedInternship] = useState(
@@ -16,8 +15,7 @@ function AIAssistant() {
     useEffect(() => {
         const fetchInternships = async () => {
             try {
-                const response = await axios.get(
-                    `${API_URL}/api/internships`
+                const response = await API.get("/api/internships"
                 );
                 setInternships(response.data);
             }

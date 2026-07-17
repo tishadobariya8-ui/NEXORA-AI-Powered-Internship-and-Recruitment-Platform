@@ -6,11 +6,14 @@ import "./buttons.css";
 import "./cards.css";
 import "./layout.css";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ProfileProvider } from "./context/profileContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <ProfileProvider>
+        <App />
+      </ProfileProvider>
     </AuthProvider>
   </React.StrictMode>
 );

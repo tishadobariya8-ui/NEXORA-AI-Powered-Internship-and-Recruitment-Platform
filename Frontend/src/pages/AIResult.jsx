@@ -1,10 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../AIResult.css";
+import API from "../api";
 
 function AIResult() {
-    const API_URL = "http://127.0.0.1:8000";
 
     const storedUser =
         JSON.parse(localStorage.getItem("user"));
@@ -25,8 +24,7 @@ function AIResult() {
 
     const loadResumeAnalysis = useCallback(async () => {
         try {
-            const response = await axios.post(
-                `${API_URL}/api/ai/resume-analyzer`,
+            const response = await API.post("/api/ai/resume-analyzer",
                 null,
                 {
                     params: {
@@ -47,12 +45,11 @@ function AIResult() {
         finally {
             setLoading(false);
         }
-    }, [storedUser?.email, API_URL]);
+    }, [storedUser?.email]);
 
     const loadJobMatch = useCallback(async () => {
         try {
-            const response = await axios.post(
-                `${API_URL}/api/ai/job-match`,
+            const response = await API.post("/api/ai/job-match",
                 null,
                 {
                     params: {
@@ -73,12 +70,11 @@ function AIResult() {
 
             setLoading(false);
         }
-    }, [storedUser?.email, internshipId, API_URL]);
+    }, [storedUser?.email, internshipId]);
 
     const loadCoverLetter = useCallback(async () => {
         try {
-            const response = await axios.post(
-                `${API_URL}/api/ai/cover-letter`,
+            const response = await API.post("/api/ai/cover-letter",
                 null,
                 {
                     params: {
@@ -101,7 +97,7 @@ function AIResult() {
             setLoading(false);
         }
 
-    }, [storedUser?.email, internshipId, API_URL]);
+    }, [storedUser?.email, internshipId]);
 
     const copyCoverLetter = async () => {
         try {
@@ -120,8 +116,7 @@ function AIResult() {
 
     const loadInterviewQuestions = useCallback(async () => {
         try {
-            const response = await axios.post(
-                `${API_URL}/api/ai/interview-questions`,
+            const response = await API.post("/api/ai/interview-questions",
                 null,
                 {
                     params: {
@@ -143,7 +138,7 @@ function AIResult() {
         finally {
             setLoading(false);
         }
-    }, [storedUser?.email, internshipId, API_URL]);
+    }, [storedUser?.email, internshipId]);
 
     useEffect(() => {
         if (type === "resume") {
@@ -678,7 +673,7 @@ function AIResult() {
 
                     <div className="question-section">
 
-                        {interviewQuestions.technical.map((item, index) => (
+                        {interviewQuestions.hr.map((item, index) => (
 
                             <div key={index} className="question-card">
 
@@ -716,7 +711,7 @@ function AIResult() {
 
                     <div className="question-section">
 
-                        {interviewQuestions.technical.map((item, index) => (
+                        {interviewQuestions.project.map((item, index) => (
 
                             <div key={index} className="question-card">
 

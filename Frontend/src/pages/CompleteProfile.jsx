@@ -1,12 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "../CompleteProfile.css";
-import axios from "axios";
+import API from "../api";
 
 function CompleteProfile() {
     const navigate = useNavigate();
-    const API_URL = "http://127.0.0.1:8000";
-
     const storedUser = JSON.parse(
         localStorage.getItem("user")) || {};
 
@@ -85,8 +83,8 @@ function CompleteProfile() {
 
         try{
 
-            const response = await axios.get(
-                `${API_URL}/api/profile/me`,
+            const response = await API.get(
+                "/api/profile/me",
                 {
                     params:{
                         email: storedUser.email
@@ -356,8 +354,8 @@ function CompleteProfile() {
 
             try {
 
-                await axios.put(
-                    `${API_URL}/api/profile/basic`,
+                await API.put(
+                    "/api/profile/basic",
                     {
                         fullName: basicInfo.fullName,
                         email: basicInfo.email,
@@ -427,8 +425,8 @@ function CompleteProfile() {
 
         if (Object.keys(errors).length === 0) {
             try {
-                await axios.put(
-                    `${API_URL}/api/profile/education`,
+                await API.put(
+                    "/api/profile/education",
                     {
                         email: basicInfo.email,
                         college: education.college,
@@ -483,8 +481,8 @@ function CompleteProfile() {
 
             try {
 
-                await axios.put(
-                    `${API_URL}/api/profile/career`,
+                await API.put(
+                    "/api/profile/career",
                     {
                         email: basicInfo.email,
 
@@ -543,8 +541,8 @@ function CompleteProfile() {
 
         try {
 
-            await axios.post(
-                `${API_URL}/api/profile/resume`,
+            await API.post(
+                "/api/profile/resume",
                 formData,
                 {
                     headers: {
@@ -604,8 +602,8 @@ function CompleteProfile() {
 
         try {
 
-            await axios.put(
-                `${API_URL}/api/profile/skills`,
+            await API.put(
+                "/api/profile/skills",
                 {
                     email: basicInfo.email,
                     skills: skills
@@ -637,8 +635,8 @@ function CompleteProfile() {
             setSocialErrors(errors);
             if (Object.keys(errors).length !== 0) return;
             try{
-                await axios.put(
-                    `${API_URL}/api/profile/social`,
+                await API.put(
+                    "/api/profile/social",
                     {
                         email: basicInfo.email,
 
@@ -677,8 +675,8 @@ function CompleteProfile() {
 
         try {
 
-            await axios.put(
-                `${API_URL}/api/profile/about`,
+            await API.put(
+                "/api/profile/about",
                 {
                     email: basicInfo.email,
                     about: text

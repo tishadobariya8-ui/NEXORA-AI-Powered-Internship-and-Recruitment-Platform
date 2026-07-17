@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Api from "../api";
+import API from "../api";
 import "../Internship.css";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/useAuth";
@@ -21,7 +21,7 @@ function Internships() {
     useEffect(() => {
         const fetchInternships = async () => {
             try {
-                const response = await Api.get("/api/internships");
+                const response = await API.get("/api/internships/");
                 setInternships(response.data);
             }
             catch (err) {
@@ -36,10 +36,10 @@ function Internships() {
     }, []);
 
     useEffect(() => {
-        if (!user) return;
+        if (!user || internships.length === 0) return;
         const fetchSaved = async () => {
             try {
-                const response = await Api.get(`/api/save/${user.email}`);
+                const response = await API.get(`/api/save/${user.email}`);
                 const savedIds = response.data.map(item => item._id);
                 setSaved(savedIds);
             } catch (err) {
@@ -47,7 +47,7 @@ function Internships() {
             }
         };
         fetchSaved();
-    }, [user]);
+    }, [user, internships]);
 
   const filteredInternships = internships.filter((item) => {
     const matchSearch =
@@ -70,7 +70,7 @@ function Internships() {
         }
         try {
             if (saved.includes(id)) {
-                await Api.delete("/api/save", {
+                await API.delete("/api/save", {
                     data: {
                         user_email: user.email,
                         internship_id: id
@@ -78,7 +78,7 @@ function Internships() {
                 });
                 setSaved(saved.filter(item => item !== id));
             } else {
-                await Api.post("/api/save", {
+                await API.post("/api/save", {
                     user_email: user.email,
                     internship_id: id
                 });
@@ -89,27 +89,27 @@ function Internships() {
         }
     };
 
-    if (loading) {
-        return (
-            <>
-                <Navbar />
-                <h2 style={{ textAlign: "center", marginTop: "50px" }}>
-                    Loading internships...
-                </h2>
-            </>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <>
+    //             <Navbar />
+    //             <h2 style={{ textAlign: "center", marginTop: "50px" }}>
+    //                 Loading internships...
+    //             </h2>
+    //         </>
+    //     );
+    // }
 
-    if (error) {
-        return (
-            <>
-                <Navbar />
-                <h2 style={{ textAlign: "center", marginTop: "50px" }}>
-                    {error}
-                </h2>
-            </>
-        );
-    }
+    // if (error) {
+    //     return (
+    //         <>
+    //             <Navbar />
+    //             <h2 style={{ textAlign: "center", marginTop: "50px" }}>
+    //                 {error}
+    //             </h2>
+    //         </>
+    //     );
+    // }
 
     return (
 
@@ -200,7 +200,19 @@ function Internships() {
 
             <div className="internship-grid">
 
-                {filteredInternships.length > 0 ? (
+                    {loading ? (
+
+                        <div className="loading">
+                            <h2>Loading internships...</h2>
+                        </div>
+
+                    ) : error ? (
+
+                        <div className="loading">
+                            <h2>{error}</h2>
+                        </div>
+
+                    ) : filteredInternships.length > 0 ? (
 
                     filteredInternships.slice(0, visible).map((item) => (
 
