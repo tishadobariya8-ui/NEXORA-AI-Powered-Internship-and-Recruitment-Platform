@@ -8,6 +8,7 @@ from app.routes.profile import router as profile_router
 from app.routes.internship import router as internship_router
 from app.routes.application import router as application_router
 from app.routes.ai import router as ai_router
+from app.routes import save_internship
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
@@ -54,7 +55,7 @@ app.include_router(
     prefix="/api/applications",
     tags=["Applications"]
 )
-
+app.include_router(save_internship.router)
 # AI Router
 app.include_router(ai_router)
 
@@ -75,3 +76,4 @@ async def global_exception_handler(request: Request, exc: Exception):
         status_code=500,
         content={"detail": str(exc)}
     )
+

@@ -1,13 +1,11 @@
 from fastapi import APIRouter, HTTPException
 from datetime import datetime
 from bson import ObjectId
-
 from app.database.connection import (
     applications_collection,
     internships_collection,
     users_collection
 )
-
 from app.schemas.application_schema import ApplyInternship
 
 router = APIRouter()

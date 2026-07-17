@@ -10,9 +10,7 @@ function CompleteProfile() {
     const storedUser = JSON.parse(
         localStorage.getItem("user")) || {};
 
-    // ==========================
     // STATES
-    // ==========================
 
     const [activeSection, setActiveSection] = useState("basic");
     const [profileImage, setProfileImage] = useState(null);
@@ -62,9 +60,7 @@ function CompleteProfile() {
     const [skills, setSkills] = useState([]);
     const [skillsCompleted, setSkillsCompleted] = useState(false);
     
-    // ==========================
     // SOCIAL LINKS
-    // ==========================
 
     const [socialLinks, setSocialLinks] = useState({
         linkedin: "",
@@ -263,7 +259,7 @@ function CompleteProfile() {
 
         }
 
-    }, [storedUser?.email, navigate, API_URL]);
+    }, [storedUser?.email, navigate]);
 
     useEffect(() => {
         loadProfile();
@@ -369,8 +365,6 @@ function CompleteProfile() {
                     }
                 );
 
-                // alert(response.data.message);
-
                 const user = JSON.parse(localStorage.getItem("user"));
 
                 user.fullName = basicInfo.fullName;
@@ -393,9 +387,7 @@ function CompleteProfile() {
         }
     };
 
-    // ==========================
     // SAVE EDUCATION
-    // ==========================
 
     const saveEducation = async () => {
 
@@ -459,9 +451,7 @@ function CompleteProfile() {
 
     };
 
-    // ==========================
     // SAVE CAREER
-    // ==========================
 
     const saveCareer = async () => {
 
@@ -710,9 +700,7 @@ function CompleteProfile() {
         }
     };
 
-    // ==========================
     // SIDEBAR SECTIONS
-    // ==========================
 
     const sections = [
 
@@ -1032,9 +1020,7 @@ function CompleteProfile() {
 
                     )}
 
-                    {/* ==========================
-                        EDUCATION
-                    ========================== */}
+                    {/* EDUCATION */}
 
                     {activeSection === "education" && (
 
@@ -1192,9 +1178,7 @@ function CompleteProfile() {
 
                     )}
 
-                    {/* ==========================
-                        CAREER PREFERENCES
-                    ========================== */}
+                    {/* CAREER PREFERENCES */}
 
                     {activeSection === "career" && (
 
@@ -1323,9 +1307,7 @@ function CompleteProfile() {
                     </div>
                     )}
 
-                    {/* ==========================
-                            RESUME
-                    ========================== */}
+                    {/* RESUME */}
 
                     {activeSection === "resume" && (
 
@@ -1413,9 +1395,7 @@ function CompleteProfile() {
 
                     )}
 
-                    {/* ==========================
-                        SKILLS
-                    ========================== */}
+                    {/* SKILLS */}
 
                     {activeSection === "skills" && (
 
@@ -1576,9 +1556,8 @@ function CompleteProfile() {
 
                         </div>
                     )}
-                    {/* ==========================
-                        ABOUT YOURSELF
-                    ========================== */}
+
+                    {/* ABOUT YOURSELF */}
 
                     {activeSection === "about" && (
 

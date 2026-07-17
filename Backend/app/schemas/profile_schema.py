@@ -1,22 +1,20 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
+
 
 class BasicProfile(BaseModel):
     fullName: str
     email: str
     mobile: str
-
-    college: str = ""
-    degree: str = ""
-    branch: str = ""
-    currentYear: Optional[str] = ""
-    graduationYear: str = ""
-    cgpa: Optional[str] = ""
-
-    skills: List[str] = []
-
-    linkedin: str = ""
-    github: str = ""
-    portfolio: Optional[str] = ""
-    leetcode: Optional[str] = ""
-    hackerrank: Optional[str] = ""
+    college: str
+    degree: str
+    branch: str
+    currentYear: str
+    graduationYear: str
+    cgpa: str
+    skills: List[str]
+    linkedin: str
+    github: str
+    portfolio: str
+    leetcode: str
+    hackerrank: str

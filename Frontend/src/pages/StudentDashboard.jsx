@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { useAuth } from "../context/useAuth";
 import axios from "axios";
 import AIAssistant from "../components/AIAssistant";
+import Api from "../api";
 
 function StudentDashboard() {
 
@@ -18,6 +19,8 @@ function StudentDashboard() {
     );
     const [profile, setProfile] = useState(null);
     const [applications, setApplications] = useState([]);
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [savedInternships, setSavedInternships] = useState([]);
 
     const currentUser = {
         fullName: profile?.fullName || user?.fullName || "Student",
@@ -71,9 +74,38 @@ function StudentDashboard() {
         fetchApplications();
     }, [currentUser.email]);
 
+    useEffect(() => {
+        if (!user) return;
+        const fetchSavedInternships = async () => {
+            try {
+                const response = await Api.get(`/api/save/${user.email}`);
+                setSavedInternships(response.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchSavedInternships();
+    }, [user]);
+
     const initials = currentUser.fullName
         ? currentUser.fullName.charAt(0).toUpperCase()
         : "?";
+
+    const removeSaved = async (id) => {
+        try {
+            await Api.delete("/api/save", {
+                data: {
+                    user_email: user.email,
+                    internship_id: id
+                }
+            });
+            setSavedInternships(prev =>
+                prev.filter(item => item._id !== id)
+            );
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <>
@@ -112,6 +144,13 @@ function StudentDashboard() {
                                 Applications
                             </button>
 
+                            <button
+                                className={`sb-item ${activePanel === "saved" ? "act" : ""}`}
+                                onClick={() => setActivePanel("saved")}
+                            >
+                                Saved Internships
+                            </button>
+
                             <div className="sb-sec">
                                 Achievements
                             </div>
@@ -133,67 +172,46 @@ function StudentDashboard() {
                         </div>
                         <button
                             className="logout-btn"
-                            onClick={() => {
-
-                                logout();
-
-                                navigate("/");
-
-                            }}
+                            onClick={() => setShowLogoutModal(true)}
                         >
                             Logout
                         </button>
-
                     </aside>
 
                     <div className="dash-main">
-
                         {activePanel === "overview" && (
-
                             <>
-
                                 <div className="dash-hdr">
-
                                     <div>
-
                                         <h2>
-
                                             Welcome,
-
                                             <span style={{ color: "#4A7C59" }}>
                                                 {" "}{currentUser.fullName}
                                             </span>
                                         </h2>
-
                                         <p>
                                             Your internship journey starts here
                                         </p>
-
                                     </div>
-
                                     <button
                                         className="btn btn-sage btn-sm"
                                         onClick={() => navigate("/internships")}
                                     >
                                         + Find Internships
                                     </button>
-
                                 </div>
 
                                 {/* PROFILE CARD */}
 
                                 <div className="prof-card">
-
                                     <div className="prof-av">
                                         {initials}
                                     </div>
 
                                     <div className="prof-info">
-
                                         <div className="prof-name">
                                             {currentUser.fullName}
                                         </div>
-
                                         <div className="prof-email">
                                             {currentUser.email}
                                         </div>
@@ -205,15 +223,12 @@ function StudentDashboard() {
                                     >
                                         Edit Profile
                                     </button>
-
                                 </div>
 
                                 {/* METRIC CARDS */}
 
                                 <div className="met-grid">
-
                                     <div className="met-c sage">
-
                                         <div className="met-l">
                                             Applications
                                         </div>
@@ -227,11 +242,9 @@ function StudentDashboard() {
                                                 ? `${applications.length} Application${applications.length > 1 ? "s" : ""}`
                                                 : "No applications yet"}
                                         </div>
-
                                     </div>
 
                                     <div className="met-c terra">
-
                                         <div className="met-l">
                                             Active Internship
                                         </div>
@@ -243,12 +256,9 @@ function StudentDashboard() {
                                         <div className="met-sub">
                                             Apply to get started
                                         </div>
-
                                     </div>
 
-
                                     <div className="met-c gold">
-
                                         <div className="met-l">
                                             Certificates
                                         </div>
@@ -260,12 +270,9 @@ function StudentDashboard() {
                                         <div className="met-sub">
                                             Complete internship to earn
                                         </div>
-
                                     </div>
 
-
                                     <div className="met-c blue">
-
                                         <div className="met-l">
                                             Interviews
                                         </div>
@@ -277,13 +284,10 @@ function StudentDashboard() {
                                         <div className="met-sub">
                                             After application review
                                         </div>
-
                                     </div>
-
                                 </div>
 
                                 <div className="ps">
-
                                     <div
                                         style={{
                                             display: "flex",
@@ -292,17 +296,13 @@ function StudentDashboard() {
                                             marginBottom: "12px"
                                         }}
                                     >
-
                                         <div className="sh3">
                                             Active Internship
                                         </div>
-
                                     </div>
 
                                     <div className="icard">
-
                                         <div className="empty">
-
                                             <div className="empty-ico">
                                                 📋
                                             </div>
@@ -322,23 +322,15 @@ function StudentDashboard() {
                                             >
                                                 Browse Internships →
                                             </button>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                                 </>
-
                                 )}
 
                                 {activePanel === "progress" && (
-
                                     <>
-
                                         <div className="dash-hdr">
-
                                             <div>
 
                                                 <h2>My Internship</h2>
@@ -348,13 +340,9 @@ function StudentDashboard() {
                                                 </p>
 
                                             </div>
-
                                         </div>
-
                                         <div className="icard">
-
                                             <div className="empty">
-
                                                 <div className="empty-ico">
                                                     🎯
                                                 </div>
@@ -374,28 +362,60 @@ function StudentDashboard() {
                                                 >
                                                     Browse & Apply Now →
                                                 </button>
-
                                             </div>
-
                                         </div>
-
                                     </>
-
                                 )}
 
+                                {activePanel === "saved" && (
+                                    <div className="ps">
+                                        <h2 className="sh3">
+                                            Saved Internships
+                                        </h2>
+                                        {savedInternships.length === 0 ? (
+                                            <div className="empty">
+                                                <div className="empty-ico">❤️</div>
+                                                <h3>No Saved Internships</h3>
+                                                <p>
+                                                    Save internships from the internship page.
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <div className="applications-list">
+                                                {savedInternships.map((item) => (
+                                                    <div className="application-card" key={item._id}>
+                                                        <h3>{item.title}</h3>
+                                                        <p><strong>Company:</strong> {item.company}</p>
+                                                        <p><strong>Location:</strong> {item.location}</p>
+                                                        <p><strong>Stipend:</strong> {item.stipend}</p>
+                                                        <p><strong>Duration:</strong> {item.duration}</p>
+                                                        <button
+                                                            className="btn btn-sage"
+                                                            onClick={() =>
+                                                                navigate(`/internships/${item._id}`)
+                                                            }
+                                                        >
+                                                            View Details
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-outline"
+                                                            onClick={() => removeSaved(item._id)}
+                                                        >
+                                                            Remove
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                    )}
+
                                 {activePanel === "apps" && (
-
                                     <>
-                                    
-
                                         <div className="dash-hdr">
-
                                             <div>
-
                                                 <h2>My Applications</h2>
-
                                                 <p>All your internship applications</p>
-
                                             </div>
 
                                             <button
@@ -407,18 +427,13 @@ function StudentDashboard() {
 
                                         </div>
                                         <div className="icard">
-
                                             {applications.length > 0 ? (
-
                                                 <div className="applications-list">
-
                                                     {applications.map((item) => (
-
                                                         <div
                                                             key={item._id}
                                                             className="application-card"
                                                         >
-
                                                             <h3>{item.title}</h3>
 
                                                             <p>
@@ -449,17 +464,11 @@ function StudentDashboard() {
                                                                 <strong>Applied On:</strong>{" "}
                                                                 {new Date(item.appliedAt).toLocaleDateString()}
                                                             </p>
-
                                                         </div>
-
                                                     ))}
-
                                                 </div>
-
                                             ) : (
-
                                                 <div className="empty">
-
                                                     <div className="empty-ico">
                                                         📄
                                                     </div>
@@ -477,36 +486,24 @@ function StudentDashboard() {
                                                     >
                                                         Browse Internships →
                                                     </button>
-
                                                 </div>
-
                                             )}
-
                                         </div>                                      
                                     </>
-
                                 )}
 
                                 {activePanel === "certificates" && (
-
                                     <>
-
                                         <div className="dash-hdr">
-
                                             <div>
-
                                                 <h2>Certificates</h2>
 
                                                 <p>Your verified achievements</p>
-
                                             </div>
-
                                         </div>
 
                                         <div className="icard">
-
                                             <div className="empty">
-
                                                 <div className="empty-ico">
                                                     🏅
                                                 </div>
@@ -524,27 +521,17 @@ function StudentDashboard() {
                                                 >
                                                     Find Your First Internship →
                                                 </button>
-
                                             </div>
-
                                         </div>
-
                                     </>
-
                                 )}
 
                                 {activePanel === "skills" && (
-
                                     <>
-
                                         <div className="dash-hdr">
-
                                             <div>
-
                                                 <h2>Skills</h2>
-
                                                 <p>Your professional toolkit</p>
-
                                             </div>
 
                                             <button
@@ -553,15 +540,10 @@ function StudentDashboard() {
                                             >
                                                 + Add Skill
                                             </button>
-
                                         </div>
-
                                        <div className="icard">
-
                                             {profile?.skills?.length > 0 ? (
-
                                                 <div className="skills-container">
-
                                                     {profile.skills.map((skill, index) => (
 
                                                         <span
@@ -570,15 +552,10 @@ function StudentDashboard() {
                                                         >
                                                             {skill}
                                                         </span>
-
                                                     ))}
-
                                                 </div>
-
                                             ) : (
-
                                                 <div className="empty">
-
                                                     <div className="empty-ico">
                                                         ⚡
                                                     </div>
@@ -595,21 +572,41 @@ function StudentDashboard() {
                                                     >
                                                         Add First Skill
                                                     </button>
-
                                                 </div>
-
                                             )}
-
                                         </div> 
-
                                     </>
-
                                 )}
 
                                 {activePanel === "ai" && (
                                     <AIAssistant />
                                 )}
 
+                                {showLogoutModal && (
+                                    <div className="logout-overlay">
+                                        <div className="logout-modal">
+                                            <p>Are you sure you want to logout?</p>
+                                            <div className="logout-actions">
+                                                <button
+                                                    className="cancel-btn"
+                                                    onClick={() => setShowLogoutModal(false)}
+                                                >
+                                                    Cancel
+                                                </button>
+
+                                                <button
+                                                    className="confirm-btn"
+                                                    onClick={() => {
+                                                        logout();
+                                                        navigate("/");
+                                                    }}
+                                                >
+                                                    Logout
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                     </div>                                    
 
                 </div>

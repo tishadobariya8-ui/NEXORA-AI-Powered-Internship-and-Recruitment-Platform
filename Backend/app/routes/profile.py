@@ -12,9 +12,7 @@ from app.schemas.social_schema import SocialUpdate
 
 router = APIRouter()
 
-# -------------------------------
 # BASIC INFORMATION
-# -------------------------------
 
 @router.put("/basic")
 async def update_basic(data: BasicProfile):
@@ -44,7 +42,6 @@ async def update_basic(data: BasicProfile):
         "success": True,
         "message": "Basic Information Updated Successfully"
     }
-
 
 # EDUCATION
 

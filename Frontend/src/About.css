@@ -1,15 +1,13 @@
-/* =====================================
-   ABOUT PAGE - PART 1
-   Hero + Mission
-===================================== */
-
 .about-container{
     width:92%;
     max-width:1280px;
     margin:0 auto;
 }
 
-/* ================= HERO ================= */
+/*  HERO  */
+.about-page {
+    padding-top: 90px;
+}
 
 .about-hero{
     background:var(--bg);
@@ -49,7 +47,7 @@
     line-height:1.8;
 }
 
-/* ================= MISSION ================= */
+/*  MISSION  */
 
 .mission-section{
     padding:70px 0;
@@ -117,9 +115,7 @@
 
 }
 
-/* =====================================
-   COMMON SECTION
-===================================== */
+/* COMMON SECTION */
 
 .section-title{
 
@@ -144,15 +140,9 @@
     color:var(--ink3);
 
     line-height:1.8;
-
     margin-bottom:45px;
 
 }
-
-/* =====================================
-   ABOUT PAGE - PART 2
-   Values Section
-===================================== */
 
 .values-section{
     padding:70px 0;
@@ -243,11 +233,6 @@
     line-height:1.75;
 
 }
-
-/* =====================================
-   ABOUT PAGE - PART 3
-   Founders Section
-===================================== */
 
 .founders-section{
     padding:70px 0;
@@ -435,10 +420,6 @@
 
 }
 
-/* =====================================
-   ABOUT PAGE - PART 4
-   Quote Section
-===================================== */
 
 .quote-section{
     padding:70px 0 90px;
@@ -486,9 +467,7 @@
 
 }
 
-/* =====================================
-   HOVER EFFECTS
-===================================== */
+/* HOVER EFFECTS */
 
 .mission-card,
 .value-card,
@@ -508,10 +487,7 @@
 
 }
 
-/* =====================================
-   SCROLL ANIMATION
-===================================== */
-
+/* SCROLL ANIMATION */
 .about-hero,
 .mission-section,
 .values-section,
@@ -542,9 +518,7 @@
 
 }
 
-/* =====================================
-   RESPONSIVE
-===================================== */
+/* RESPONSIVE */
 
 @media(max-width:1100px){
 

@@ -17,7 +17,6 @@ function Navbar() {
                 <div
                     className="logo"
                     onClick={() => navigate("/")}
-                    style={{ cursor: "pointer" }}
                 >
                     NEX<span>ORA</span>
                 </div>

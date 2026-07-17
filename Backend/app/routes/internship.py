@@ -13,7 +13,6 @@ router = APIRouter()
 async def create_internship(data: InternshipCreate):
 
     internship = {
-
         "title": data.title,
         "company": data.company,
         "location": data.location,
@@ -30,33 +29,22 @@ async def create_internship(data: InternshipCreate):
     )
 
     return {
-
         "success": True,
-
         "message": "Internship Created Successfully",
-
         "id": str(result.inserted_id)
-
     }
 
 @router.get("/")
 async def get_all_internships():
-
     internships = []
-
     cursor = internships_collection.find()
-
     async for internship in cursor:
-
         internship["_id"] = str(internship["_id"])
-
         internships.append(internship)
-
     return internships
 
 @router.get("/{internship_id}")
 async def get_internship(internship_id: str):
-
     internship = await internships_collection.find_one(
         {
             "_id": ObjectId(internship_id)
@@ -68,9 +56,7 @@ async def get_internship(internship_id: str):
             status_code=404,
             detail="Internship not found"
         )
-
     internship["_id"] = str(internship["_id"])
-
     return internship
 
 @router.post("/create-many")
@@ -79,7 +65,6 @@ async def create_many_internships(data: List[InternshipCreate]):
     internships = []
 
     for item in data:
-
         internships.append({
             "title": item.title,
             "company": item.company,

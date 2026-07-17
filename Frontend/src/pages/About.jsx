@@ -48,67 +48,67 @@ function About() {
 
       {/*  HERO  */}
 
-      <section className="about-hero">
-        <div className="about-container page-container">
-          <span className="about-tag">
-            OUR STORY
-          </span>
-          <h1>
-            Bridging the gap <br />
-            between <span>education</span> and <br />
-            real experience
-          </h1>
-          <p>
-            NEXORA was born in a college classroom by two students who kept
-            hearing the same frustration — great skills, no opportunities.
-            So they built the platform they wished existed.
-          </p>
-        </div>
-      </section>
-
-    {/* MISSION */}
-
-      <section className="mission-section">
-        <div className="about-container page-container">
-          <div className="mission-card">
-            <div className="mission-icon">
-              💡
-            </div>
-            <h2>Our Mission</h2>
+      <div className="about-page">
+        <section className="about-hero">
+          <div className="about-container page-container">
+            <span className="about-tag">
+              OUR STORY
+            </span>
+            <h1>
+              Bridging the gap <br />
+              between <span>education</span> and <br />
+              real experience
+            </h1>
             <p>
-              To democratize access to real-world internship experiences
-              for every student in India — regardless of their college,
-              city, or background — while helping startups and companies
-              build world-class teams.
+              NEXORA was born in a college classroom by two students who kept
+              hearing the same frustration — great skills, no opportunities.
+              So they built the platform they wished existed.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/*  VALUES  */}
+      {/* MISSION */}
 
-      <section className="values-section">
-        <div className="about-container page-container">
-          <span className="about-tag">
-            VALUES
-          </span>
-          <h2 className="section-title">
-            What we stand for
-          </h2>
-          <div className="values-grid">
-            {values.map((value, index) => (
-              <div className="value-card" key={index}>
-                <div className="value-icon">{value.icon}</div>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
+        <section className="mission-section">
+          <div className="about-container page-container">
+            <div className="mission-card">
+              <div className="mission-icon">
+                💡
               </div>
-            ))}
-          </div> 
-        </div>
-      </section>
-      
+              <h2>Our Mission</h2>
+              <p>
+                To democratize access to real-world internship experiences
+                for every student in India — regardless of their college,
+                city, or background — while helping startups and companies
+                build world-class teams.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/*  VALUES  */}
+
+        <section className="values-section">
+          <div className="about-container page-container">
+            <span className="about-tag">
+              VALUES
+            </span>
+            <h2 className="section-title">
+              What we stand for
+            </h2>
+            <div className="values-grid">
+              {values.map((value, index) => (
+                <div className="value-card" key={index}>
+                  <div className="value-icon">{value.icon}</div>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </div>
+              ))}
+            </div> 
+          </div>
+        </section>
+      </div>
     </>
   );
 }
-
 export default About;

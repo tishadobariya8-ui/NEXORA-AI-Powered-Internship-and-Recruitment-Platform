@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Api from "../api";
 import "../Internship.css";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../context/useAuth";
 
 function Internships() {
   const [search, setSearch] = useState("");
@@ -14,7 +15,8 @@ function Internships() {
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  
+  const { user } = useAuth();
+
   const navigate = useNavigate();
     useEffect(() => {
         const fetchInternships = async () => {
@@ -30,9 +32,22 @@ function Internships() {
                 setLoading(false);
             }
         };
-
         fetchInternships();
     }, []);
+
+    useEffect(() => {
+        if (!user) return;
+        const fetchSaved = async () => {
+            try {
+                const response = await Api.get(`/api/save/${user.email}`);
+                const savedIds = response.data.map(item => item._id);
+                setSaved(savedIds);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchSaved();
+    }, [user]);
 
   const filteredInternships = internships.filter((item) => {
     const matchSearch =
@@ -48,18 +63,30 @@ function Internships() {
     return matchSearch && matchCategory && matchLocation;
     });
 
-    const toggleSave = (id) => {
-
-        if (saved.includes(id)) {
-
-            setSaved(saved.filter((item) => item !== id));
-
-        } else {
-
-            setSaved([...saved, id]);
-
+    const toggleSave = async (id) => {
+        if (!user) {
+            alert("Please login first.");
+            return;
         }
-
+        try {
+            if (saved.includes(id)) {
+                await Api.delete("/api/save", {
+                    data: {
+                        user_email: user.email,
+                        internship_id: id
+                    }
+                });
+                setSaved(saved.filter(item => item !== id));
+            } else {
+                await Api.post("/api/save", {
+                    user_email: user.email,
+                    internship_id: id
+                });
+                setSaved([...saved, id]);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     if (loading) {
@@ -91,186 +118,188 @@ function Internships() {
 
     {/* INTERNSHIP SEARCH */}
 
-      <section className="browse-section">
+      <div className="internship-page">
 
-        <div className="page-container">
+        <section className="browse-section">
 
-            <span className="section-tag">
-                OPPORTUNITIES
-            </span>
+            <div className="page-container">
 
-            <h1 className="browse-title">
-                Browse Internships
-            </h1>
+                <span className="section-tag">
+                    OPPORTUNITIES
+                </span>
 
-            <p className="browse-subtitle">
-                {filteredInternships.length} Explore the latest internship opportunities.
-            </p>
-        
-            <div className="browse-filters">
+                <h1 className="browse-title">
+                    Browse Internships
+                </h1>
 
-                <input
-                    type="text"
-                    placeholder="🔍 Search role, company, skill..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+                <p className="browse-subtitle">
+                    {filteredInternships.length} Explore the latest internship opportunities.
+                </p>
+            
+                <div className="browse-filters">
 
-                <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                >
-                    <option value="All">All Categories</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Frontend">Frontend</option>
-                    <option value="Backend">Backend</option>
-                    <option value="Full Stack">Full Stack</option>
-                    <option value="AI / ML">AI / ML</option>
-                    <option value="Data Science">Data Science</option>
-                    <option value="UI / UX">UI / UX</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                </select>
+                    <input
+                        type="text"
+                        placeholder="🔍 Search role, company, skill..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
 
-                <select>
-                    <option>All Modes</option>
-                    <option>Remote</option>
-                    <option>Hybrid</option>
-                    <option>On-site</option>
-                </select>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="All">All Categories</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Frontend">Frontend</option>
+                        <option value="Backend">Backend</option>
+                        <option value="Full Stack">Full Stack</option>
+                        <option value="AI / ML">AI / ML</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="UI / UX">UI / UX</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                    </select>
 
-                <select>
-                    <option>Any Duration</option>
-                    <option>1 Month</option>
-                    <option>2 Months</option>
-                    <option>3 Months</option>
-                    <option>6 Months</option>
-                </select>
+                    <select>
+                        <option>All Modes</option>
+                        <option>Remote</option>
+                        <option>Hybrid</option>
+                        <option>On-site</option>
+                    </select>
 
-                <button 
-                  className="clear-btn"
-                  onClick={() => {
-                    setSearch("");
-                    setCategory("All");
-                    setLocation("All");
-                  }}
-                >
-                    Clear
-                </button>
+                    <select>
+                        <option>Any Duration</option>
+                        <option>1 Month</option>
+                        <option>2 Months</option>
+                        <option>3 Months</option>
+                        <option>6 Months</option>
+                    </select>
+
+                    <button 
+                    className="clear-btn"
+                    onClick={() => {
+                        setSearch("");
+                        setCategory("All");
+                        setLocation("All");
+                    }}
+                    >
+                        Clear
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-      </section>
+        {/* FEATURED INTERNSHIPS */}
 
-    {/* FEATURED INTERNSHIPS */}
+        <section className="featured-section">
 
-      <section className="featured-section">
+            <div className="page-container">
 
-        <div className="page-container">
+            <div className="internship-grid">
 
-          <div className="internship-grid">
+                {filteredInternships.length > 0 ? (
 
-            {filteredInternships.length > 0 ? (
+                    filteredInternships.slice(0, visible).map((item) => (
 
-                filteredInternships.slice(0, visible).map((item) => (
+                        <div className="intern-card" key={item._id}>
 
-                    <div className="intern-card" key={item._id}>
+                        <div className="intern-top">
 
-                    <div className="intern-top">
+                            <div className="company-logo">
+                                🏢      
+                            </div>
 
-                        <div className="company-logo">
-                            🏢      
+                            <button 
+                                className="save-btn" 
+                                onClick={() => toggleSave(item._id)}
+                                >
+                                {saved.includes(item._id) ?  "❤️" : "🤍"}
+                            </button>
+
                         </div>
 
-                        <button 
-                            className="save-btn" 
-                            onClick={() => toggleSave(item._id)}
+                        <span className="intern-category">
+                            {item.workMode}
+                        </span>
+
+                        <h3>
+                            {item.title}
+                        </h3>
+
+                        <p className="company-name">
+                            {item.company}
+                        </p>
+
+                        <div className="intern-info">
+
+                            <span>📍 {item.location}</span>
+
+                            <span>💰 {item.stipend}</span>
+
+                            <span>🕒 {item.duration}</span>
+
+                        </div>
+
+                        <div className="intern-tags">
+
+                            {item.skills?.map((skill, index) => (
+                                <span key={index}>
+                                    {skill}
+                                </span>
+                            ))}
+
+                        </div>
+
+                        <div className="card-buttons">
+
+                            <button
+                                className="apply-btn"
+                                onClick={() => navigate(`/internships/${item._id}`)}
                             >
-                            {saved.includes(item._id) ?  "❤️" : "🤍"}
-                        </button>
+                                Apply Now
+                            </button>
 
+                            <button 
+                                className="details-btn" 
+                                onClick={() => navigate(`/internships/${item._id}`)}
+                            >
+                                View Details
+                            </button>
+
+                        </div>
+
+                        </div>
+
+                    ))
+                ) : (
+                    <div className="no-results">
+                        <h2>No internships found</h2>
+                        <p>
+                        Try another keyword or change your filters.
+                        </p>
                     </div>
+                )}
 
-                    <span className="intern-category">
-                        {item.workMode}
-                    </span>
-
-                    <h3>
-                        {item.title}
-                    </h3>
-
-                    <p className="company-name">
-                        {item.company}
-                    </p>
-
-                    <div className="intern-info">
-
-                        <span>📍 {item.location}</span>
-
-                        <span>💰 {item.stipend}</span>
-
-                        <span>🕒 {item.duration}</span>
-
-                    </div>
-
-                    <div className="intern-tags">
-
-                        {item.skills?.map((skill, index) => (
-                            <span key={index}>
-                                {skill}
-                            </span>
-                        ))}
-
-                    </div>
-
-                    <div className="card-buttons">
-
-                        <button
-                            className="apply-btn"
-                            onClick={() => navigate(`/internships/${item._id}`)}
-                        >
-                            Apply Now
-                        </button>
-
-                        <button 
-                            className="details-btn" 
-                            onClick={() => navigate(`/internships/${item._id}`)}
-                        >
-                            View Details
-                        </button>
-
-                    </div>
-
-                    </div>
-
-                ))
-            ) : (
-                <div className="no-results">
-                    <h2>No internships found</h2>
-                    <p>
-                    Try another keyword or change your filters.
-                    </p>
                 </div>
-            )}
+
+                <div className="load-more">
+
+                <button
+                    onClick={() => setVisible((prev) => prev + 6)}
+                    disabled={visible >= filteredInternships.length}
+                >
+                    Load More Internships
+                </button>
+
+                </div>
 
             </div>
 
-            <div className="load-more">
-
-            <button
-                onClick={() => setVisible(visible + 6)}
-                disabled={visible >= filteredInternships.length}
-            >
-                Load More Internships
-            </button>
-
-            </div>
-
-          </div>
-
-      </section>
-
+        </section>
+      </div>
     </>
   );
 }

@@ -1,6 +1,4 @@
-/* ===============================
-   GLOBAL CARD
-=============================== */
+/* GLOBAL CARD */
 
 .card{
 
@@ -9,9 +7,6 @@
     border:1px solid var(--border);
 
     border-radius:18px;
-
-    padding:22px;
-
     transition:.3s;
 
     box-shadow:0 4px 12px rgba(0,0,0,.04);

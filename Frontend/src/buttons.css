@@ -1,6 +1,4 @@
-/* ===============================
-   PRIMARY BUTTON
-=============================== */
+/* PRIMARY BUTTON */
 
 .btn-primary{
     display:inline-flex;
@@ -24,9 +22,7 @@
     transform:translateY(-2px);
 }
 
-/* ===============================
-   SECONDARY BUTTON
-=============================== */
+/* SECONDARY BUTTON */
 
 .btn-secondary{
     display:inline-flex;
@@ -46,17 +42,13 @@
     background:var(--primary-hover);
 }
 
-/* ===============================
-   SMALL BUTTON
-=============================== */
+/* SMALL BUTTON */
 
 .btn-sm{
     font-size:14px;
 }
 
-/* ===============================
-   LARGE BUTTON
-=============================== */
+/* LARGE BUTTON */
 
 .btn-lg{
     font-size:16px;
